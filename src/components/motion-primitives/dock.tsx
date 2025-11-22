@@ -44,11 +44,13 @@ export type DockItemProps = {
 export type DockLabelProps = {
   className?: string;
   children: React.ReactNode;
+  isHovered?: MotionValue<number>;
 };
 
 export type DockIconProps = {
   className?: string;
   children: React.ReactNode;
+  width?: MotionValue<number>;
 };
 
 export type DocContextType = {
@@ -166,23 +168,21 @@ function DockItem({ children, className, onClick }: DockItemProps) {
       onClick={onClick}
     >
       {Children.map(children, (child) =>
-        cloneElement(child as React.ReactElement, { width, isHovered })
+        cloneElement(child as React.ReactElement<any>, { width, isHovered })
       )}
     </motion.div>
   );
 }
 
-function DockLabel({ children, className, ...rest }: DockLabelProps) {
-  const restProps = rest as Record<string, unknown>;
-  const isHovered = restProps["isHovered"] as MotionValue<number>;
+function DockLabel({ children, className, isHovered }: DockLabelProps) {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const unsubscribe = isHovered.on("change", (latest) => {
+    const unsubscribe = isHovered?.on("change", (latest) => {
       setIsVisible(latest === 1);
     });
 
-    return () => unsubscribe();
+    return () => unsubscribe?.();
   }, [isHovered]);
 
   return (
@@ -207,11 +207,8 @@ function DockLabel({ children, className, ...rest }: DockLabelProps) {
   );
 }
 
-function DockIcon({ children, className, ...rest }: DockIconProps) {
-  const restProps = rest as Record<string, unknown>;
-  const width = restProps["width"] as MotionValue<number>;
-
-  const widthTransform = useTransform(width, (val) => val / 2);
+function DockIcon({ children, className, width }: DockIconProps) {
+  const widthTransform = useTransform(width ?? useMotionValue(0), (val) => val / 2);
 
   return (
     <motion.div
