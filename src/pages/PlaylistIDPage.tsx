@@ -18,11 +18,20 @@ const PlaylistIDPage = () => {
       <Link
         to="/playlists"
         className="absolute flex items-center gap-3 top-25 left-9 font-semibold underline underline-offset-6 text-primary"
+        viewTransition
       >
         <MoveLeftIcon className="size-5" />
         Back to playlists
       </Link>
       <div className="container mx-auto max-h-[80vh] mt-40 overflow-y-auto px-5 flex flex-col items-center gap-8 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] ">
+        {playlist?.image && (
+          <img
+            src={playlist.image}
+            alt={playlist.title}
+            className="h-60 w-60 rounded-xl object-cover shadow-xl mb-4"
+            style={{ viewTransitionName: `playlist-image-${id}` }}
+          />
+        )}
         {playlist?.songs.map((song) => {
           return (
             <>
@@ -33,7 +42,7 @@ const PlaylistIDPage = () => {
                     alt={song.trackName}
                     className="rounded-full"
                   />
-                  <div className="flex flex-col gap-1">
+                  <div className="flex flex-col gap-1 hidden md:block">
                     <p className="font-semibold text-sm">{song.artistName}</p>
                     <p className="font-semibold text-lg">{song.trackName}</p>
                   </div>
@@ -45,7 +54,7 @@ const PlaylistIDPage = () => {
                     }}
                   >
                     <Music2Icon />
-                    Play Song
+                    <p className="hidden md:block">Play Song</p>
                   </Button>
                   <Button
                     variant={"ghost"}

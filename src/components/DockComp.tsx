@@ -16,6 +16,7 @@ const DockComp = () => {
                   ? "text-[#1ED760]" // active styles
                   : "" // default styles
             }
+            viewTransition
           >
             <DockItem
               key={idx}

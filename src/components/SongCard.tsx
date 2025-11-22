@@ -1,10 +1,10 @@
 import LazyImage from "./LazyImage";
-import { ListPlus, Heart } from "lucide-react";
+import { ListPlus, Heart, Play } from "lucide-react";
 import { Button } from "./ui/button";
 import { useFavoritesStore } from "@/store/favorites.store";
 import type { SongType } from "@/constants/type";
 import type { Dispatch, SetStateAction } from "react";
-
+import { usePlayerStore } from "@/store/player.store";
 const SongCard = ({
   song,
   setAddSongDialog,
@@ -15,16 +15,22 @@ const SongCard = ({
   setSelectedSong: Dispatch<SetStateAction<SongType | null>>;
 }) => {
   const { addFavorite, favorites, removeFavorite } = useFavoritesStore();
+  const { setPlayedSong } = usePlayerStore();
   return (
     <div className="flex justify-between items-center">
       {" "}
       <LazyImage
         src={song.artworkUrl60}
         alt={song.trackName}
-        className="rounded-2xl"
+        className="rounded-2xl hidden md:block"
       />{" "}
-      <p className="text-xl font-semibold ml-3">{song.trackName}</p>
-      <div className="ml-auto flex gap-5">
+      <p className="text-sm md:text-lg font-semibold ml-3">{`${song.trackName.slice(0, 10)}...`}</p>
+      <div className="ml-auto flex gap-2">
+        <Button className="bg-primary" size={"icon"} onClick={() => {
+          setPlayedSong(song);
+        }}>
+          <Play />
+        </Button>
         {" "}
         <Button
           className="bg-white"

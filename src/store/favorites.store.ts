@@ -1,4 +1,5 @@
 import type { SongType } from "@/constants/type";
+import { toast } from "sonner";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
@@ -12,7 +13,8 @@ export const useFavoritesStore = create<FavoritesStore>()(
   persist<FavoritesStore>(
     (set) => ({
       favorites: [],
-      addFavorite: (song: SongType) =>
+      addFavorite: (song: SongType) =>{
+        toast.success(`${song.trackName} added to favorites`); 
         set((state) => ({
           favorites: [
             ...state.favorites,
@@ -20,11 +22,14 @@ export const useFavoritesStore = create<FavoritesStore>()(
               ...song,
             },
           ],
-        })),
-      removeFavorite: (id) =>
+        }))
+      },
+      removeFavorite: (id) =>{
+        toast.success("Song removed from favorites"); 
         set((state) => ({
           favorites: state.favorites.filter((f) => f.trackId !== id),
-        })),
+        }))
+      },
     }),
     {
       name: "favorites",

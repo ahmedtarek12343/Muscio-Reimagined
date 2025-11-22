@@ -2,13 +2,8 @@ import { useState, useRef, useEffect } from "react";
 import {
   Play,
   Pause,
-  SkipBack,
-  SkipForward,
   Volume2,
   VolumeX,
-  Heart,
-  Shuffle,
-  Repeat,
   X,
 } from "lucide-react";
 import type { SongType } from "@/constants/type";
@@ -25,7 +20,7 @@ const AudioPlayerBar = ({ song }: AudioPlayerBarProps) => {
   const [duration, setDuration] = useState(0);
   const [volume, setVolume] = useState(0.7);
   const [isMuted, setIsMuted] = useState(false);
-  const { playedSong, setPlayedSong } = usePlayerStore();
+  const { setPlayedSong } = usePlayerStore();
 
   const audioRef = useRef<HTMLAudioElement>(null);
 
@@ -124,24 +119,8 @@ const AudioPlayerBar = ({ song }: AudioPlayerBarProps) => {
             {/* Main playback controls */}
             <div className="flex flex-col items-center gap-1 flex-1 max-w-md">
               <div className="flex items-center gap-3">
-                <button className="text-muted-foreground hover:text-foreground transition-colors">
-                  <Shuffle size={16} />
-                </button>
-
-                <button className="text-muted-foreground hover:text-foreground transition-colors">
-                  <SkipBack size={18} />
-                </button>
-
                 <button onClick={togglePlay} className="text-primary ">
                   {isPlaying ? <Pause size={18} /> : <Play size={18} />}
-                </button>
-
-                <button className="text-muted-foreground hover:text-foreground transition-colors">
-                  <SkipForward size={18} />
-                </button>
-
-                <button className="text-muted-foreground hover:text-foreground transition-colors">
-                  <Repeat size={16} />
                 </button>
               </div>
             </div>

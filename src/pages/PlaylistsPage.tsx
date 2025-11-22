@@ -94,12 +94,14 @@ const PlaylistsPage = () => {
             to={`/playlists/${playlist.id}`}
             key={playlist.id}
             className="w-full max-w-xl rounded-2xl border p-4 text-center"
+            viewTransition
           >
             {playlist.image && (
               <img
                 src={playlist.image}
                 alt={playlist.title}
                 className="mx-auto mb-2 h-24 w-24 rounded object-cover"
+                style={{ viewTransitionName: `playlist-image-${playlist.id}` }}
               />
             )}
             <div className="flex gap-4 items-center">
@@ -276,11 +278,11 @@ const PlaylistsPage = () => {
       </Dialog>
       {playlists.length > 0 && (
         <Button
-          className="fixed bottom-6 right-6 rounded-full p-7 shadow-lg"
+          className="fixed bottom-6 right-6 rounded-full p-4 md:p-7 shadow-lg"
           size="icon"
           onClick={() => setFormOpen(true)}
         >
-          <ListPlus className="size-5" />
+          <ListPlus className="size-4 md:size-7" />
         </Button>
       )}
     </div>

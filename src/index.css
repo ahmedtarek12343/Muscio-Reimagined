@@ -23,6 +23,15 @@
   box-shadow: 0 0 0 2px #1ed760;
 }
 
+html{
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+body{
+  overflow-x: hidden;
+}
+
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);

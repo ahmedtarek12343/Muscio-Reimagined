@@ -19,6 +19,7 @@ const MainPage = () => {
     setSong(e.target.value);
   };
 
+
   return (
     <>
       <div className="min-h-screen overflow-hidden w-full bg-background relative text-foregorund bg-gradient-to-b from-[#1ed75f1e] to-transparent after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:bg-gradient-to-t after:opacity-90 after:from-[#090909] after:h-26 after:z-20 after:to-transparent">
@@ -42,7 +43,7 @@ const MainPage = () => {
             ))}
           </InfiniteSlider>
         </div>
-        <div className="absolute top-[45%] text-center space-y-5 left-1/2 w-full transform -translate-x-1/2 -translate-y-1/2">
+        <div className="absolute top-[45%] px-10 md:px-5 text-center space-y-5 left-1/2 w-full transform -translate-x-1/2 -translate-y-1/2">
           <TextType
             text={["All the songs you need", "in one place", "and for free"]}
             textColors={["#fff", "#fff", " var(--primary)"]}
