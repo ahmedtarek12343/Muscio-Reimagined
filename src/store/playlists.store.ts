@@ -57,7 +57,7 @@ export const usePlaylistsStore = create<PlaylistStore>()(
           }
 
           set((state) => {
-            playlist.songs.push(song);
+            state.playlists.find((p) => p.id === playlistId)?.songs.push(song);
             return state;
           });
 

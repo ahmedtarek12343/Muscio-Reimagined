@@ -11,7 +11,7 @@ import {
   DialogTitle,
   DialogFooter,
 } from "@/components/ui/dialog";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/input";
@@ -55,6 +55,7 @@ const PlaylistsPage = () => {
   const {
     control: editControl,
     handleSubmit: handleEditSubmit,
+    reset,
     formState: { errors: editErrors, isSubmitting: isEditing },
   } = useForm<z.infer<typeof PlaylistSchema>>({
     resolver: zodResolver(PlaylistSchema),
@@ -85,6 +86,16 @@ const PlaylistsPage = () => {
       });
     }
   };
+
+  useEffect(() => {
+    if (editingPlaylist) {
+      reset({
+        title: editingPlaylist.title,
+        image: editingPlaylist.image,
+      });
+    }
+  }, [editingPlaylist, reset]);
+
   return (
     <div className="container mx-auto max-h-[80vh] py-5 overflow-y-auto px-5 mt-20 flex flex-col items-center gap-3 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
       {/* Existing playlists */}
