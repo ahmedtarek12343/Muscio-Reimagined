@@ -24,7 +24,7 @@ const SongsDropdown = ({ debouncedSong }: { debouncedSong: string }) => {
   const [addSongDialog, setAddSongDialog] = useState(false);
   const [selectedSong, setSelectedSong] = useState<SongType | null>(null);
   return (
-    <div className="absolute w-full">
+    <div className="absolute w-full left-0 mt-2">
       {debouncedSong && results.length === 0 ? (
         <p>No results Found</p>
       ) : (

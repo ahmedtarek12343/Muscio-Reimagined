@@ -4,8 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Music2Icon, Trash2Icon } from "lucide-react";
 
 const FavoritesPage = () => {
-  const { favorites,removeFavorite } = useFavoritesStore();
-  const {setPlayedSong}=usePlayerStore();
+  const { favorites, removeFavorite } = useFavoritesStore();
+  const { setPlayedSong } = usePlayerStore();
   return (
     <div className="">
       <div className="container mx-auto max-h-[80vh] mt-40 overflow-y-auto px-5 flex flex-col items-center gap-8 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] ">
@@ -44,6 +44,9 @@ const FavoritesPage = () => {
             </>
           );
         })}
+        {favorites?.length === 0 && (
+          <p className="text-center">No songs in favorites</p>
+        )}
       </div>
     </div>
   );

@@ -24,14 +24,21 @@ const SongCard = ({
         alt={song.trackName}
         className="rounded-2xl hidden md:block"
       />{" "}
-      <p className="text-sm md:text-lg font-semibold ml-3">{`${song.trackName.slice(0, 10)}...`}</p>
+      <p className="text-sm md:text-lg font-semibold ml-3">{`${
+        song.trackName.length > 10
+          ? song.trackName.slice(0, 10) + "..."
+          : song.trackName
+      }`}</p>
       <div className="ml-auto flex gap-2">
-        <Button className="bg-primary" size={"icon"} onClick={() => {
-          setPlayedSong(song);
-        }}>
+        <Button
+          className="bg-primary"
+          size={"icon"}
+          onClick={() => {
+            setPlayedSong(song);
+          }}
+        >
           <Play />
-        </Button>
-        {" "}
+        </Button>{" "}
         <Button
           className="bg-white"
           onClick={() => {

@@ -10,7 +10,7 @@
 }
 
 .scroll-list::-webkit-scrollbar {
-  width: 8px;
+  display: none;
 }
 
 .scroll-list::-webkit-scrollbar-track {

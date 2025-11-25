@@ -1,6 +1,6 @@
 import { usePlaylistsStore } from "@/store/playlists.store";
 import { Button } from "@/components/ui/button";
-import { Edit, ListPlus, Trash2Icon } from "lucide-react";
+import { Edit, ListPlus, PlusIcon, Trash2Icon } from "lucide-react";
 import { z } from "zod";
 import type { PlaylistType } from "@/constants/type";
 import {
@@ -96,16 +96,18 @@ const PlaylistsPage = () => {
             className="w-full max-w-xl rounded-2xl border p-4 text-center"
             viewTransition
           >
-            {playlist.image && (
-              <img
-                src={playlist.image}
-                alt={playlist.title}
-                className="mx-auto mb-2 h-24 w-24 rounded object-cover"
-                style={{ viewTransitionName: `playlist-image-${playlist.id}` }}
-              />
-            )}
             <div className="flex gap-4 items-center">
-              <div className="flex flex-col">
+              {playlist.image && (
+                <img
+                  src={playlist.image}
+                  alt={playlist.title}
+                  className="mb-2 w-20 h-20 rounded-full object-cover"
+                  style={{
+                    viewTransitionName: `playlist-image-${playlist.id}`,
+                  }}
+                />
+              )}
+              <div className="flex-col hidden md:flex">
                 <p className="text-lg font-medium">{playlist.title}</p>
                 <p className="text-sm text-muted-foreground">
                   {playlist.songs.length} song
@@ -144,6 +146,11 @@ const PlaylistsPage = () => {
         >
           No playlists yet – create your first one
           <ListPlus className="h-5 w-5" />
+        </Button>
+      )}
+      {playlists.length > 0 && (
+        <Button onClick={() => setFormOpen(true)}>
+          <PlusIcon className="h-5 w-5" /> Add Playlist
         </Button>
       )}
 
@@ -276,15 +283,6 @@ const PlaylistsPage = () => {
           </form>
         </DialogContent>
       </Dialog>
-      {playlists.length > 0 && (
-        <Button
-          className="fixed bottom-6 right-6 rounded-full p-4 md:p-7 shadow-lg"
-          size="icon"
-          onClick={() => setFormOpen(true)}
-        >
-          <ListPlus className="size-4 md:size-7" />
-        </Button>
-      )}
     </div>
   );
 };

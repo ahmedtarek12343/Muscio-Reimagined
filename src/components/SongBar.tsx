@@ -1,11 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import {
-  Play,
-  Pause,
-  Volume2,
-  VolumeX,
-  X,
-} from "lucide-react";
+import { Play, Pause, Volume2, VolumeX, X } from "lucide-react";
 import type { SongType } from "@/constants/type";
 import { Button } from "./ui/button";
 import { usePlayerStore } from "@/store/player.store";
@@ -119,8 +113,11 @@ const AudioPlayerBar = ({ song }: AudioPlayerBarProps) => {
             {/* Main playback controls */}
             <div className="flex flex-col items-center gap-1 flex-1 max-w-md">
               <div className="flex items-center gap-3">
-                <button onClick={togglePlay} className="text-primary ">
-                  {isPlaying ? <Pause size={18} /> : <Play size={18} />}
+                <button
+                  onClick={togglePlay}
+                  className="text-black bg-primary px-3 py-1.5 rounded-md"
+                >
+                  {isPlaying ? <Pause size={14} /> : <Play size={14} />}
                 </button>
               </div>
             </div>

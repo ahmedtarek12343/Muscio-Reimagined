@@ -28,62 +28,72 @@ const PlaylistIDPage = () => {
           <img
             src={playlist.image}
             alt={playlist.title}
-            className="h-60 w-60 rounded-xl object-cover shadow-xl mb-4"
+            className="h-60 w-60 rounded-full object-cover shadow-xl mb-4"
             style={{ viewTransitionName: `playlist-image-${id}` }}
           />
         )}
-        {playlist?.songs.map((song) => {
-          return (
-            <>
-              <div className="bg-background flex hover:bg-primary/5 transition-all justify-between items-center border w-full p-5 rounded-2xl">
-                <div className="flex items-center gap-6">
-                  <img
-                    src={song.artworkUrl60}
-                    alt={song.trackName}
-                    className="rounded-full"
-                  />
-                  <div className="flex flex-col gap-1 hidden md:block">
-                    <p className="font-semibold text-sm">{song.artistName}</p>
-                    <p className="font-semibold text-lg">{song.trackName}</p>
+        {playlist && playlist?.songs.length > 0
+          ? playlist?.songs.map((song) => {
+              return (
+                <>
+                  <div className="bg-background flex hover:bg-primary/5 transition-all justify-between items-center border w-full p-5 rounded-2xl">
+                    <div className="flex items-center gap-6">
+                      <img
+                        src={song.artworkUrl60}
+                        alt={song.trackName}
+                        className="rounded-full"
+                      />
+                      <div className="flex flex-col gap-1 hidden md:block">
+                        <p className="font-semibold text-sm">
+                          {song.artistName}
+                        </p>
+                        <p className="font-semibold text-lg">
+                          {song.trackName}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex gap-3">
+                      <Button
+                        onClick={() => {
+                          setPlayedSong(song);
+                        }}
+                      >
+                        <Music2Icon />
+                        <p className="hidden md:block">Play Song</p>
+                      </Button>
+                      <Button
+                        variant={"ghost"}
+                        onClick={() => {
+                          if (favorites.some((f) => f.trackId === song.trackId))
+                            removeFavorite(song.trackId);
+                          else addFavorite(song);
+                        }}
+                      >
+                        {" "}
+                        <Heart
+                          className={`size-5 ${
+                            favorites.some((f) => f.trackId === song.trackId)
+                              ? "fill-primary text-primary"
+                              : ""
+                          } transition-all duration-300`}
+                        />{" "}
+                      </Button>{" "}
+                      <Button
+                        variant={"destructive"}
+                        onClick={() =>
+                          removeSongFromPlaylist(id!, song.trackId)
+                        }
+                      >
+                        <Trash2Icon></Trash2Icon>
+                      </Button>
+                    </div>
                   </div>
-                </div>
-                <div className="flex gap-3">
-                  <Button
-                    onClick={() => {
-                      setPlayedSong(song);
-                    }}
-                  >
-                    <Music2Icon />
-                    <p className="hidden md:block">Play Song</p>
-                  </Button>
-                  <Button
-                    variant={"ghost"}
-                    onClick={() => {
-                      if (favorites.some((f) => f.trackId === song.trackId))
-                        removeFavorite(song.trackId);
-                      else addFavorite(song);
-                    }}
-                  >
-                    {" "}
-                    <Heart
-                      className={`size-5 ${
-                        favorites.some((f) => f.trackId === song.trackId)
-                          ? "fill-primary text-primary"
-                          : ""
-                      } transition-all duration-300`}
-                    />{" "}
-                  </Button>{" "}
-                  <Button
-                    variant={"destructive"}
-                    onClick={() => removeSongFromPlaylist(id!, song.trackId)}
-                  >
-                    <Trash2Icon></Trash2Icon>
-                  </Button>
-                </div>
-              </div>
-            </>
-          );
-        })}
+                </>
+              );
+            })
+          : playlist?.songs.length === 0 && (
+              <p className="text-center">No songs in playlist</p>
+            )}
       </div>
     </div>
   );
