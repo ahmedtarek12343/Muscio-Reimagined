@@ -1,8 +1,6 @@
 # 🎵 Musico - Free Music Player
 
 <div align="center">
-  <img src="/public/logo.png" alt="Musico Logo" width="120" height="120">
-  
   <p align="center">
     All the songs you need, in one place, and for free
     <br />
